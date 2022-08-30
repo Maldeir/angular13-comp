@@ -4,9 +4,8 @@ const { shareAll, withModuleFederationPlugin } = require('@angular-architects/mo
 module.exports = withModuleFederationPlugin({
 
   name: 'comp',
-
   exposes: {
-    './Component': './src/app/app.component.ts',
+    './routes': './src/app/base-comp/base-comp.routes.ts',
   },
 
   shared: {
