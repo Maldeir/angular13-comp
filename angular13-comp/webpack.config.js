@@ -7,6 +7,7 @@ module.exports = withModuleFederationPlugin({
   exposes: {
     './routes': './src/app/base-comp/base-comp.routes.ts',
     './Module': './src/app/base-comp/base-comp.module.ts',
+    './HeaderComponent': './src/app/header-comp/header-comp.component.ts'
   },
 
   shared: {
