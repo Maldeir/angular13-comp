@@ -1,0 +1,36 @@
+name: CI/CD
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - release/v*
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.15.x]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{matrix.node-version}}
+      - run: |
+          cd ./service13
+          npm install
+      - uses: jfrog/setup-jfrog-cli@v3
+        env:
+          JF_URL: ${{secrets.JF_URL}}
+          JF_USER: ${{secrets.JF_USERNAME}}
+          JF_PASSWORD: ${{secrets.JF_PASSWORD}}
+      - run: |
+          pwd
+          jf rt ping
+          jf npm-config
+          jf rt npm-install
+          jf rt bag
+          jf rt npm-publish
