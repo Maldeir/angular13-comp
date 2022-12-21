@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 
 export class Configs {
   app: {
@@ -13,6 +13,7 @@ export class Configs {
 
 @Injectable({providedIn: 'root'})
 export class ConfigLibService {
+  @Output() configUpdateEmitter: EventEmitter<any> = new EventEmitter<any>();
   //Redefine later mix environment for build
   private configs: Configs = {
     app: {
@@ -30,5 +31,7 @@ export class ConfigLibService {
 
   write(data: Configs): void {
     this.configs = new Configs(data);
+
+    this.configUpdateEmitter.emit(data);
   }
 }
