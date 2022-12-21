@@ -28,7 +28,6 @@ jobs:
           JF_USER: ${{secrets.JF_USERNAME}}
           JF_PASSWORD: ${{secrets.JF_PASSWORD}}
       - run: |
-          pwd
           jf rt ping
           jf npm-config
           jf rt npm-install
